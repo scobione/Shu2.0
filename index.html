@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="description" content="Privates Scooter-Tuning-Dashboard mit Web-Bluetooth-Prüfung.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./src/styles.css">
+  <title>Scooter Lab</title>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="eyebrow">PRIVATE / OFF-ROAD</div>
+    <h1>Scooter Lab</h1>
+  </div>
+  <span id="supportBadge" class="badge badge-warn">Xiaomi 5: experimentell</span>
+</header>
+
+<main class="shell">
+  <section class="hero card">
+    <div>
+      <p class="eyebrow">WEB BLUETOOTH</p>
+      <h2>Dein Scooter. Deine Konfiguration.</h2>
+      <p class="muted">Verbindung, Diagnose und Konfigurationsprofile in einer Oberfläche.</p>
+    </div>
+    <button id="connectBtn" class="btn btn-primary">Bluetooth verbinden</button>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <div class="card-head"><h3>Verbindung</h3><span id="connDot" class="dot"></span></div>
+      <div id="connectionState" class="big-value">Nicht verbunden</div>
+      <div class="kv"><span>Gerät</span><b id="deviceName">—</b></div>
+      <div class="kv"><span>Transport</span><b>Web Bluetooth</b></div>
+      <div id="browserWarning" class="notice hidden"></div>
+    </article>
+
+    <article class="card">
+      <div class="card-head"><h3>Konfiguration</h3><span class="badge">Profil</span></div>
+      <label>Region
+        <select id="region">
+          <option value="EU">EU</option>
+          <option value="DE">DE</option>
+          <option value="US">US</option>
+          <option value="OFFROAD">Privatgelände / Off-road</option>
+        </select>
+      </label>
+      <label>Maximalgeschwindigkeit
+        <div class="range-row">
+          <input id="speed" type="range" min="6" max="100" step="1" value="20">
+          <output id="speedOut">20 km/h</output>
+        </div>
+      </label>
+      <label>Startgeschwindigkeit
+        <div class="range-row">
+          <input id="startSpeed" type="range" min="0" max="10" step="1" value="3">
+          <output id="startSpeedOut">3 km/h</output>
+        </div>
+      </label>
+      <label class="switch-row"><span>Konfiguration vor dem Flashen prüfen</span><input id="verify" type="checkbox" checked></label>
+      <button id="saveProfile" class="btn btn-secondary">Profil speichern</button>
+    </article>
+  </section>
+
+  <section class="card">
+    <div class="card-head"><h3>Firmware / Flash</h3><span id="flashBadge" class="badge badge-danger">Xiaomi 5 OTA-Protokoll nicht verifiziert</span></div>
+    <div class="notice danger">
+      <b>Wichtig:</b> Die Xiaomi Electric Scooter 5 ist nach dem aktuell verfügbaren Open-Source-Stand nicht als SHU/Web-Bluetooth-Flashziel verifiziert. Für Brightway-Controller existieren aktuelle Community-Tools für UART, nicht für einen sicheren Web-Bluetooth-Flash.
+    </div>
+    <div class="firmware-row">
+      <label class="file">
+        <span>Firmware-Datei (.bin/.zip)</span>
+        <input id="firmwareFile" type="file" accept=".bin,.zip,application/octet-stream,application/zip">
+      </label>
+      <button id="verifyFirmware" class="btn btn-secondary">Datei prüfen</button>
+    </div>
+    <pre id="firmwareInfo" class="terminal">Noch keine Datei ausgewählt.</pre>
+    <button id="flashBtn" class="btn btn-disabled" disabled>Flash starten</button>
+    <p class="muted small">Die Flash-Schaltfläche bleibt für Xiaomi 5 absichtlich deaktiviert, solange kein verifiziertes Brightway-BLE-OTA-Protokoll vorliegt. Die 100-km/h-Einstellung ist nur ein Profilwert und wird nicht automatisch auf den Scooter geschrieben. Dadurch wird kein erfundener GATT-Befehl an deinen Controller gesendet.</p>
+  </section>
+
+  <section class="card">
+    <div class="card-head"><h3>Diagnose</h3><button id="clearLog" class="text-btn">Log löschen</button></div>
+    <pre id="log" class="terminal" aria-live="polite"></pre>
+  </section>
+
+  <section class="card checklist">
+    <h3>Vor jedem Firmware-Versuch</h3>
+    <label><input type="checkbox"> Original-Firmware/Seriennummer dokumentiert</label>
+    <label><input type="checkbox"> Akku ausreichend geladen</label>
+    <label><input type="checkbox"> Scooter steht sicher und ist nicht fahrbereit</label>
+    <label><input type="checkbox"> Firmware passt exakt zu Controller/Board</label>
+    <label><input type="checkbox"> Hash der Firmware geprüft</label>
+  </section>
+</main>
+
+<footer>Keine Verbindung zu Xiaomi. Nur für eigene Geräte und kontrollierte Privatgelände.</footer>
+<script type="module" src="./src/app.js"></script>
+</body>
+</html>
