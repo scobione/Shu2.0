@@ -1,9 +1,0 @@
-{
-  "name": "Scooter Lab",
-  "short_name": "Scooter Lab",
-  "start_url": "./",
-  "display": "standalone",
-  "background_color": "#090b0e",
-  "theme_color": "#0b0d10",
-  "lang": "de"
-}
