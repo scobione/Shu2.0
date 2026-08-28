@@ -1,5 +1,0 @@
-V3 orchestration code: MIT License.
-
-Third-party upstream projects are NOT included in this archive and retain their
-own licenses. Install them from their official repositories as described in
-SETUP.md.
