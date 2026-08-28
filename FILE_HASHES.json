@@ -1,0 +1,46 @@
+{
+  ".github/workflows/check.yml": {
+    "bytes": 473,
+    "sha256": "71fa29b4143d58139be72bee8535e9ac33666ccfb1404416bcfedbb3210de6c7"
+  },
+  "LICENSE-V3.txt": {
+    "bytes": 203,
+    "sha256": "fe88c40d39d6f65dae9bb79047e4fb36b16dc3b60aa7589d32c2266e12f2e8c6"
+  },
+  "README.md": {
+    "bytes": 1160,
+    "sha256": "e621dd597357ec8b71abb60f88f8d138f760d4cb31ba8b17a468f35b865a015f"
+  },
+  "SETUP.md": {
+    "bytes": 2758,
+    "sha256": "5bcf9d984490ddb5cdeea8fe02877653f1839a9c951ebb13a20932b3010bdd72"
+  },
+  "bridge/__pycache__/server.cpython-313.pyc": {
+    "bytes": 9314,
+    "sha256": "c72bcdbf95da83baee11438a757e8b90e9c6c0bae9a0f69ead26a2943bc1aa37"
+  },
+  "bridge/requirements.txt": {
+    "bytes": 14,
+    "sha256": "a4f65b742fe9fcf72c5231047a0955602c7d7a4020a9dadbadeb818eb97122b5"
+  },
+  "bridge/server.py": {
+    "bytes": 5327,
+    "sha256": "1a051b40f106c0cf0d934f5eb370d6694f763f89b209732768bf304beac7518a"
+  },
+  "scripts/start-v3.ps1": {
+    "bytes": 678,
+    "sha256": "7f2142fb61d79fbca04de1cc84a0be06fbfde581f41289486c0741a609a52389"
+  },
+  "web/app.js": {
+    "bytes": 4262,
+    "sha256": "48b1233a06f6e0801e16fee84acdaa10d77d17ae11afedcde9c123fadcbffc36"
+  },
+  "web/index.html": {
+    "bytes": 3457,
+    "sha256": "d18e5ea6c278228c999911f1822b5264e201dfeabf763c45d017185e9d4a5f55"
+  },
+  "web/styles.css": {
+    "bytes": 2388,
+    "sha256": "b0374426a7f004218def069cd0e16e11e2eac7dd37672d72728c576e1b3b2896"
+  }
+}

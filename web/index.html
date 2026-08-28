@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090b0e"><title>Scooter Lab V3 — Mi5</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<header><div><small>PRIVATE / OFF-ROAD</small><h1>Scooter Lab <span>V3</span></h1></div><div id="status" class="pill">Bridge offline</div></header>
+<main>
+<section class="hero card"><div><small>XIAOMI ELECTRIC SCOOTER 5</small><h2>Brightway Workflow</h2><p>Mi5 · Firmware <b>2.5.3_0011.0013</b></p></div><div class="actions"><button id="bridgeBtn">Bridge prüfen</button><button id="serialBtn">Web Serial verbinden</button></div></section>
+
+<section class="steps">
+<div class="step active" data-step="1">1 <span>Firmware</span></div>
+<div class="step" data-step="2">2 <span>Patch</span></div>
+<div class="step" data-step="3">3 <span>UART</span></div>
+<div class="step" data-step="4">4 <span>Flash</span></div>
+</section>
+
+<section class="card">
+<h3>1 · Firmware</h3>
+<div class="drop"><input id="fw" type="file" accept=".bin"><label for="fw">Originale MCU-Firmware auswählen</label><p id="fwInfo">Keine Datei ausgewählt.</p></div>
+<button id="inspect" disabled>Firmware prüfen</button>
+<pre id="inspectOut"></pre>
+</section>
+
+<section class="card">
+<h3>2 · Patch-Profil</h3>
+<p class="muted">Die eigentliche Patch-Engine bleibt <code>bw-patcher</code>. V3 ruft die installierte Upstream-Engine auf, statt deren Patchlogik nachzubauen.</p>
+<div class="grid">
+<label>Max. Profilwert (km/h)<input id="speed" type="number" min="1" max="100" value="45"></label>
+<label>Motor Start Speed<input id="mss" type="number" min="0" max="10" value="3"></label>
+</div>
+<label class="check"><input id="rfm" type="checkbox"> Region Free (rfm), falls vom Mi5/Firmware unterstützt</label>
+<label class="check"><input id="mssOn" type="checkbox" checked> Motor Start Speed (mss), falls vom Mi5/Firmware unterstützt</label>
+<label class="check"><input id="advanced" type="checkbox"> Advanced: Patch-Namen selbst angeben</label>
+<input id="customPatches" class="wide" placeholder="z.B. rfm,mss=3" disabled>
+<button id="patch" disabled>Patch mit bw-patcher</button>
+<pre id="patchOut"></pre>
+</section>
+
+<section class="card">
+<h3>3 · UART</h3>
+<div class="uartrow"><button id="ports">COM-Ports suchen</button><select id="port"><option value="">Port auswählen …</option></select></div>
+<p class="muted">Der echte Brightway/LEQI-Flasher arbeitet laut Upstream-Projekt über UART. Web Serial dient hier zur Browser-Erkennung; der Flash-Aufruf läuft kontrolliert über den lokalen Python-Bridge-Prozess.</p>
+</section>
+
+<section class="card danger">
+<h3>4 · Flash</h3>
+<div class="confirm"><label><input id="confirmModel" type="checkbox"> Ich habe geprüft, dass der Controller zu <b>Mi5</b> passt.</label>
+<label><input id="confirmFile" type="checkbox"> Ich habe ein Backup der Original-Firmware.</label>
+<label><input id="confirmGround" type="checkbox"> Der Scooter steht sicher und wird während des Vorgangs nicht bewegt.</label></div>
+<button id="flash" disabled>Patched Firmware über UART flashen</button>
+<pre id="flashOut"></pre>
+</section>
+
+<section class="card"><h3>Log</h3><pre id="log"></pre></section>
+</main>
+<footer>V3 orchestriert die offiziellen Community-Engines. Prüfe Modell-ID und Firmware vor jedem Flash.</footer>
+<script type="module" src="./app.js"></script>
+</body></html>
