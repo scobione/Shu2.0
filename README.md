@@ -1,26 +1,36 @@
-# Scooter Lab V3
+# Tuning Portal — Release
 
-Web UI für den Brightway-Workflow des Xiaomi Electric Scooter 5 (Mi5).
+Professional UI foundation for a multi-device service portal.
 
-Aktueller Zielstand:
-- Modell: `mi5`
-- vom Nutzer genannte Firmware: `2.5.3_0011.0013`
+## Flow
+Bluetooth / Cable → E-Scooter / E-Bike → Brand → Model → Service.
 
-V3 nutzt die offiziellen Open-Source-Projekte von ScooterTeam als Engines:
-- bw-patcher: https://github.com/scooterteam/bw-patcher
-- bw-flasher: https://github.com/scooterteam/bw-flasher
+Included:
+- Xiaomi, Segway-Ninebot, NIU and Navee scooter catalog metadata
+- Bosch → Smart System catalog metadata
+- Web Bluetooth / Web Serial device selection where supported by the browser
+- Local firmware SHA-256 inspection
+- Multi-step safety wizard with warnings and 3-second countdowns
+- Police Mode (local original/control profile)
+- Reset/Original workflow (verification/preparation only)
+- Separate firmware/original and firmware/patched directories
+- GitHub static checks
 
-Der Patcher unterstützt Mi5. Der Flasher arbeitet über UART. V3 baut darum einen lokalen Python-Bridge-Prozess zwischen Web-UI und den Upstream-Engines.
+## Important safety/technical scope
 
-## Warum nicht nur GitHub Pages?
+This public release does **not** contain proprietary manufacturer firmware/ISO/update
+images, cryptographic keys, certificates, or undocumented flashing commands. It also does
+not implement a speed/power unlock for Bosch Smart System or scooters.
 
-GitHub Pages kann HTML/JS ausliefern, aber keinen lokalen Python-Flasher starten. Daher:
-Browser → localhost Bridge → bw-patcher/bw-flasher → USB-UART → Scooter.
+The profile controls in the UI are intentionally non-flashing placeholders. A real
+production adapter must use firmware you are legally entitled to use, verify the exact
+hardware/firmware revision, create/verify a backup, and use documented or authorized
+protocols.
 
-## Lizenz
+### Local run
 
-Die Upstream-Projekte haben eigene Lizenzen und bleiben separat. V3 enthält keine kopierten Upstream-Quellen; sie werden beim Setup aus den Original-Repositories installiert. Prüfe deren Lizenzbedingungen vor Weitergabe.
+    python -m http.server 8080 -d web
 
-## Sicherheit
+Open `http://localhost:8080`.
 
-Firmware-Modifikation kann Controller und Scooter beschädigen. Falsches Modell/Firmware-Matching kann zu Fehlern führen. Upstream-Projekte warnen ausdrücklich vor diesen Risiken.
+Web Bluetooth/Web Serial normally require HTTPS or localhost.
